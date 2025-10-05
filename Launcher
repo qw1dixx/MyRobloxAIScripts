@@ -1,0 +1,157 @@
+local RequiredUserID = 4555851511
+
+function ConvertDropdownValue(tbl)
+if type(tbl) == "table" then
+for _,element in ipairs(tbl) do
+return tostring(element)
+end
+else
+return tostring(tbl)
+end
+end
+
+local FollowHandler = loadstring(game:HttpGet("https://raw.githubusercontent.com/NewNexer/NexerHub/refs/heads/main/Follow-Module.luau"))()
+local WebHandler = loadstring(game:HttpGet("https://raw.githubusercontent.com/NewNexer/NexerHub/refs/heads/main/Web-Module.luau"))()
+local GetRequestMethod = function()
+local iqnd = request or http_request or HttpPost or (syn and syn.request) or (http and http.request) or (fluxus and fluxus.request) or (game and game.HttpPost) or (KRNL and KRNL.request) or (Xeno and Xeno.request)
+if iqnd then
+return iqnd
+else
+return nil
+end
+end
+local isfollowed, result = FollowHandler:IsFollowedTo(RequiredUserID)
+if isfollowed == true then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NewNexer/NexerHub/refs/heads/main/DOD/Main.luau"))()
+return
+end
+
+local Rayfield
+local RAYFIELD_SUCCESS, RAYFIELD_FAIL = pcall(function()
+Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+end)
+if not RAYFIELD_SUCCESS then
+local RAYFIELD_SUCCESS, RAYFIELD_FAIL = pcall(function()
+Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/main/source.lua"))()
+end)
+if not RAYFIELD_SUCCESS then
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Не удалось запустить библиотеку GUI",
+	Text = "Пожалуйста, проверь своё интернет подключение, или попробуй включить VPN.",
+  Icon = "rbxassetid://125704683916878",
+	Duration = 10,
+})
+return
+end
+end
+
+function Notify(title, content, time, mode)
+time = time or 4
+mode = mode or false
+if mode == true then
+img = 136186846844342
+elseif mode == false then
+img = 71508738660632
+end
+Rayfield:Notify({
+	Title = title,
+	Content = content,
+	Duration = time,
+	Image = img,
+	Actions = {},
+})
+end
+
+function DestroyRayfield()
+task.spawn(function()
+pcall(function()
+Window:Destroy()
+end)
+pcall(function()
+Rayfield:Destroy()
+end)
+pcall(function()
+game.CoreGui.Rayfield:Destroy()
+end)
+pcall(function()
+game.CoreGui.RayField:Destroy()
+end)
+pcall(function()
+game.CoreGui.OldRayfield:Destroy()
+end)
+pcall(function()
+game.CoreGui.OldRayField:Destroy()
+end)
+end)
+end
+
+local Window = Rayfield:CreateWindow({
+   Name = "Скрипт для Die of Death - Лаунчер",
+   Icon = 0,    
+   LoadingTitle = "Скрипт для Die of Death - Лаунчер",
+   LoadingSubtitle = "Сделано Германом qw1dixx' ом",
+   Theme = "Amethyst",
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false,
+
+   ConfigurationSaving = {
+      Enabled = false,
+      FolderName = "",
+      FileName = ""
+   },
+
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink",
+      RememberJoins = true
+   },
+
+   KeySystem = true,
+   KeySettings = {
+      Title = "Для начала верефицируй себя!",
+      Subtitle = "Нужен ключ!",
+      Note = "Ключ: ''cheese''",
+      FileName = "Key",
+      SaveKey = true,
+      GrabKeyFromSite = false,
+      Key = {"cheese"}
+   }
+})
+
+local Main = Window:CreateTab("Основное",85436299122876)
+
+function CopyLink(link)
+local url = tostring(link)
+setclipboard(url)
+Notify("Успешно!", "Ссылка скопирована!", 4, true)
+end
+
+function OpenLink(link)
+local url = tostring(link)
+if WebHandler then
+local suc, err = pcall(function() WebHandler:OpenRBX(url) end) if not suc then CopyLink(url) end
+else
+CopyLink(url)
+end
+end
+
+Main:CreateParagraph({Title = "Требование подписки", Content = "Этот скрипт мне было ОЧЕНЬ сложно создавать, поддержи меня подпиской на мой аккаунт в роблоксе!"})
+
+Main:CreateButton({Name = "Открыть профиль"; Callback = function()
+OpenLink("https://www.roblox.com/users/"..tostring(RequiredUserID).."/profile")
+end; })
+
+Main:CreateButton({Name = "Скопировать ссылку на профиль"; Callback = function()
+CopyLink("https://www.roblox.com/users/"..tostring(RequiredUserID).."/profile")
+end; })
+
+Main:CreateButton({Name = "Запустить скрипт"; Callback = function()
+local isfollowed, result = FollowHandler:IsFollowedTo(RequiredUserID)
+if isfollowed == true or game.Players.LocalPlayer.UserId == RequiredUserID then
+DestroyRayfield()
+Notify("Успешно!", "Скрипт запускается, ждите", 10, true)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NewNexer/NexerHub/refs/heads/main/DOD/Main.luau"))()
+else
+Notify("Ошибка!", "Ты не подписался! ( Но если ты на сто проц уверен на то что ты подписался, подожди примерно 5 минут и попробуй снова )", 10)
+end
+end; })
