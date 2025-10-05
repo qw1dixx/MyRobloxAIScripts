@@ -10,8 +10,8 @@ return tostring(tbl)
 end
 end
 
-local FollowHandler = loadstring(game:HttpGet("https://raw.githubusercontent.com/NewNexer/NexerHub/refs/heads/main/Follow-Module.luau"))()
-local WebHandler = loadstring(game:HttpGet("https://raw.githubusercontent.com/NewNexer/NexerHub/refs/heads/main/Web-Module.luau"))()
+local FollowHandler = loadstring(game:HttpGet("https://raw.githubusercontent.com/qw1dixx/MyRobloxAIScripts/refs/heads/main/FollowModule.luau"))()
+local WebHandler = loadstring(game:HttpGet("https://raw.githubusercontent.com/qw1dixx/MyRobloxAIScripts/refs/heads/main/WebModule.luau"))()
 local GetRequestMethod = function()
 local iqnd = request or http_request or HttpPost or (syn and syn.request) or (http and http.request) or (fluxus and fluxus.request) or (game and game.HttpPost) or (KRNL and KRNL.request) or (Xeno and Xeno.request)
 if iqnd then
@@ -22,7 +22,7 @@ end
 end
 local isfollowed, result = FollowHandler:IsFollowedTo(RequiredUserID)
 if isfollowed == true then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NewNexer/NexerHub/refs/heads/main/DOD/Main.luau"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/qw1dixx/MyRobloxAIScripts/refs/heads/main/maindod.luau"))()
 return
 end
 
