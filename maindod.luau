@@ -125,7 +125,7 @@ local Window = Rayfield:CreateWindow({
 
 
 pcall(function()
-local Announcements = Window:CreateTab("Announce",0)
+local Announcements = Window:CreateTab("Обращение",0)
 Announcements:CreateParagraph({Title = "Дарова!", Content = "Версия скрипта: 2.1\n\nЭтот скрипт был полностью рекодирован и пофикшен. Спасибо за использование моего скрипта. ❤️\n\nТакже заходи в дискорд сервер, там есть бесплатные премки на скрипты, и т.д."})
 Announcements:CreateButton({Name = "Скопировать ссылку на дискорд"; Callback = function()
 setclipboard(tostring("не, не хочу пока)"))
@@ -420,20 +420,20 @@ pcall(function()
 UIModule = require(LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("MainGui"):WaitForChild("Client"):WaitForChild("Modules"):WaitForChild("UI"))
 end)
 
-local Tab_3 = Window:CreateTab("Abilities",0)
-Tab_3:CreateParagraph({Title = "Abilities", Content = "You can give yourself abilities or cards with abilities."})
-Tab_3:CreateSection("Get Ability")
+local Tab_3 = Window:CreateTab("Абилки",0)
+Tab_3:CreateParagraph({Title = "Абилки", Content = "Ты можешь дать себе любую карту с абилками."})
+Tab_3:CreateSection("Получение абилки")
 
 local ChoosenAbility = "Block"
-Tab_3:CreateDropdown({Name = "Choose Ability"; Options = AbilityNames; CurrentOption = "Block"; MultiSelection = false; Callback = function(Value)
+Tab_3:CreateDropdown({Name = "Выбрать абилку"; Options = AbilityNames; CurrentOption = "Block"; MultiSelection = false; Callback = function(Value)
 ChoosenAbility = ConvertDropdownValue(Value)
 end; })
-Tab_3:CreateButton({Name = "Get Choosen Ability"; Callback = function()
+Tab_3:CreateButton({Name = "Получить выбранную абилку"; Callback = function()
 game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("RemoteEvents"):WaitForChild("AbilitySelection"):FireServer(ChoosenAbility)
 AbilityModule.CreateAbility(AbilityDatas[ChoosenAbility])
 end; })
 
-Tab_3:CreateButton({Name = "Get All Abilities"; Callback = function()
+Tab_3:CreateButton({Name = "Получить все абилки"; Callback = function()
 game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("RemoteEvents"):WaitForChild("AbilitySelection"):FireServer(unpack({{tostring(AbilityNames[math.random(1, 11)]);tostring(AbilityNames[math.random(1, 11)]);}}))
 for _,ability in pairs(AbilityNames) do
 game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("RemoteEvents"):WaitForChild("AbilitySelection"):FireServer(unpack({{tostring(ability);}}))
