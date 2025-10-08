@@ -150,7 +150,7 @@ local isfollowed, result = FollowHandler:IsFollowedTo(RequiredUserID)
 if isfollowed == true or game.Players.LocalPlayer.UserId == RequiredUserID then
 DestroyRayfield()
 Notify("Успешно!", "Скрипт запускается, ждите", 10, true)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NewNexer/NexerHub/refs/heads/main/DOD/Main.luau"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/qw1dixx/MyRobloxAIScripts/refs/heads/main/maindod.luau"))()
 else
 Notify("Ошибка!", "Ты не подписался! ( Но если ты на сто проц уверен на то что ты подписался, подожди примерно 5 минут и попробуй снова )", 10)
 end
